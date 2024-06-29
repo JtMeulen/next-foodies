@@ -1,12 +1,14 @@
 import Link from "next/link";
+import Image from "next/image";
+
+import styles from "./main-header.module.css";
 
 import Logo from "@/assets/logo.png";
-import Image from "next/image";
 
 export default function MainHeader() {
   return (
-    <header>
-      <div className="header-background">
+    <>
+      <div className={styles.background}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
           <defs>
             <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -27,21 +29,23 @@ export default function MainHeader() {
         </svg>
       </div>
 
-      <Link href="/">
-        <Image src={Logo} alt="A plate with food on it" />
-        NextLevel Food
-      </Link>
+      <header className={styles.header}>
+        <Link href="/" className={styles.logo}>
+          <Image src={Logo} alt="A plate with food on it" priority />
+          NextLevel Food
+        </Link>
 
-      <nav>
-        <ul>
-          <li>
-            <Link href="/meals">Browse Meals</Link>
-          </li>
-          <li>
-            <Link href="/community">Foodies Community</Link>
-          </li>
-        </ul>
-      </nav>
-    </header>
+        <nav className={styles.nav}>
+          <ul>
+            <li>
+              <Link href="/meals">Browse Meals</Link>
+            </li>
+            <li>
+              <Link href="/community">Foodies Community</Link>
+            </li>
+          </ul>
+        </nav>
+      </header>
+    </>
   );
 }
