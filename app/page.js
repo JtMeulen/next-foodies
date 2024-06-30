@@ -1,7 +1,6 @@
 import Link from "next/link";
 
-// import ImageSlideshow from "@/components/image-slideshow";
-
+import ImageSlideshow from "@/components/image-slideshow";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -9,8 +8,7 @@ export default function Home() {
     <>
       <header className={styles.header}>
         <div className={styles.slideshow}>
-          {/* TODO: fix setting 'use client' */}
-          {/* <ImageSlideshow /> */}
+          <ImageSlideshow />
         </div>
         <div>
           <div className={styles.hero}>
