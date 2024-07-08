@@ -1,9 +1,14 @@
+'use server';
+
 import Link from "next/link";
 
 import styles from "./page.module.css";
 import MealsGrid from "@/components/meals-grid";
+import { getAllMeals } from "@/lib/db/meals";
 
-export default function MealsPage() {
+export default async function MealsPage() {
+  const meals = await getAllMeals();
+
   return (
     <>
       <header className={styles.header}>
@@ -19,17 +24,7 @@ export default function MealsPage() {
         </p>
       </header>
       <main className={styles.main}>
-        <MealsGrid
-          meals={[
-            {
-              title: "Spicy Curry",
-              slug: "spicy-curry",
-              summary: "A very spicy and delicious curry, made with fresh ingredients.",
-              image: "/images/curry.jpg",
-              creator: "Joey",
-            },
-          ]}
-        />
+        <MealsGrid meals={meals} />
       </main>
     </>
   );
