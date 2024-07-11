@@ -1,13 +1,20 @@
 'use server';
 
 import Link from "next/link";
+import { Suspense } from "react";
 
 import styles from "./page.module.css";
-import MealsGrid from "@/components/meals-grid";
 import { getAllMeals } from "@/lib/db/meals";
+import MealsGrid from "@/components/meals-grid";
+import Loader from "@/components/loader";
+
+async function Meals() {
+  const meals = await getAllMeals();
+
+  return <MealsGrid meals={meals} />
+}
 
 export default async function MealsPage() {
-  const meals = await getAllMeals();
 
   return (
     <>
@@ -24,7 +31,9 @@ export default async function MealsPage() {
         </p>
       </header>
       <main className={styles.main}>
-        <MealsGrid meals={meals} />
+        <Suspense fallback={<Loader />}>
+          <Meals />
+        </Suspense>
       </main>
     </>
   );
